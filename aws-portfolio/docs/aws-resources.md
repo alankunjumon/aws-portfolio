@@ -1,117 +1,200 @@
-# AWS Resources — Portfolio Project
+# AWS Resources Used
 
-## Region
-
-**AWS Region:** `ap-south-1 (Mumbai)`
+This document describes every AWS service used in the **AWS Serverless Portfolio Website** project and its purpose within the architecture.
 
 ---
 
-## Amazon S3
+# Architecture Overview
 
-**Bucket Name:** `alank-portfolio-ap-south-1`
+The portfolio follows a fully serverless AWS architecture.
 
-**Purpose:** Stores the static portfolio website files (HTML, CSS, JavaScript, images).
+User Browser
 
-**Security Configuration**
+↓
 
-* Block Public Access: Enabled (all four settings ON).
-* Object Ownership: Bucket Owner Enforced (ACLs disabled).
-* Access Method: Private bucket accessible only through CloudFront Origin Access Control (OAC).
+Amazon CloudFront (HTTPS + CDN)
+
+├── Amazon S3 (Static Website)
+
+└── API Gateway (/api/contact)
+
+↓
+
+AWS Lambda (Python Backend)
+
+├── Amazon DynamoDB (Stores Contact Messages)
+
+└── Amazon SES (Email Notifications)
+
+CloudFront serves the frontend globally while forwarding `/api/contact` requests to API Gateway, which invokes a Lambda function to process contact requests.
 
 ---
 
-## Amazon CloudFront
+# Amazon S3
 
-**Distribution ID:** `E37CQ9A0LRCCFU`
+**Purpose**
 
-**Distribution Domain:** `d343tuwzqee0su.cloudfront.net`
+Hosts the static frontend of the portfolio website.
 
-**Purpose:** Serves the portfolio globally over HTTPS and routes API requests to API Gateway.
+**Resources Stored**
+
+* HTML pages
+* CSS stylesheets
+* JavaScript files
+* Images and assets
+* Resume PDF
+
+**Why S3**
+
+* Fully managed object storage.
+* Highly durable and scalable.
+* No server management required.
+
+---
+
+# Amazon CloudFront
+
+**Purpose**
+
+Acts as the Content Delivery Network (CDN) for the portfolio.
+
+**Responsibilities**
+
+* Serves the website over HTTPS.
+* Caches static assets globally.
+* Routes `/api/*` requests to API Gateway.
+* Reduces latency for visitors.
 
 **Configuration**
 
-* Default Root Object: `index.html`
-* HTTPS: Enabled (CloudFront default certificate)
-* Origin Access Control: Enabled for S3.
-* CloudFront Function: `rewrite-api-path`
+* Default Origin → Amazon S3
+* API Origin → Amazon API Gateway
+* Viewer Protocol Policy → Redirect HTTP to HTTPS
 
 ---
 
-## Amazon DynamoDB
+# Amazon API Gateway
 
-**Table Name:** `PortfolioContacts`
+**Purpose**
 
-**Partition Key:** `submissionId` (String)
+Provides the backend REST API used by the contact form.
 
-**Billing Mode:** On-Demand
+**Endpoint**
 
-**Purpose:** Stores contact form submissions.
+`POST /api/contact`
 
----
+**Responsibilities**
 
-## AWS Lambda
-
-**Function Name:** `portfolio-contact-handler`
-
-**Runtime:** Python 3.12
-
-**Purpose:** Processes contact form submissions, stores data in DynamoDB, and sends notification emails through Amazon SES.
+* Receives contact form requests.
+* Invokes AWS Lambda.
+* Returns JSON responses to the frontend.
 
 ---
 
-## IAM
+# AWS Lambda
 
-**Execution Role:** `portfolio-lambda-role`
+**Runtime**
 
-**Permissions**
+Python
 
-* DynamoDB (`PutItem` on `PortfolioContacts`)
-* Amazon SES (`SendEmail`)
+**Purpose**
+
+Processes contact form submissions.
+
+**Responsibilities**
+
+* Validates incoming data.
+* Stores messages in DynamoDB.
+* Sends email notifications using Amazon SES.
+* Returns HTTP responses.
+
+---
+
+# Amazon DynamoDB
+
+**Table**
+
+`PortfolioMessages`
+
+**Purpose**
+
+Stores every contact form submission.
+
+**Attributes**
+
+* MessageID
+* Name
+* Email
+* Message
+* Timestamp
+
+**Why DynamoDB**
+
+* Serverless NoSQL database.
+* Automatic scaling.
+* Low latency.
+
+---
+
+# Amazon SES
+
+**Purpose**
+
+Sends email notifications after successful contact form submissions.
+
+**Configuration**
+
+* Verified sender identity.
+* Verified recipient identity (SES sandbox mode).
+
+**Email Includes**
+
+* Visitor name.
+* Visitor email.
+* Message.
+* Submission timestamp.
+
+---
+
+# AWS IAM
+
+**Purpose**
+
+Provides secure permissions between AWS services.
+
+**Lambda Permissions**
+
+* DynamoDB PutItem
+* SES SendEmail
 * CloudWatch Logs
-* AWS-managed KMS for Lambda environment variables
 
-**Purpose:** Provides least-privilege access for the Lambda function.
-
----
-
-## Amazon API Gateway
-
-**API Name:** `portfolio-contact-api`
-
-**API ID:** `xkjh30d0ha`
-
-**Stage:** `prod`
-
-**Resource**
-
-* `POST /contact`
-
-**Direct Backend Endpoint (Testing)**
-
-`https://xkjh30d0ha.execute-api.ap-south-1.amazonaws.com/prod/contact`
-
-**Purpose:** Receives contact form requests from CloudFront and invokes the Lambda function.
+The project follows the **Principle of Least Privilege**.
 
 ---
 
-## Amazon SES
+# Amazon CloudWatch
 
-**Verified Sender Identity:** `alankunjumon1305@gmail.com`
+**Purpose**
 
-**Purpose:** Sends email notifications whenever a visitor submits the portfolio contact form.
+Monitors backend execution.
+
+**Used For**
+
+* Lambda execution logs.
+* Error debugging.
+* API request monitoring.
 
 ---
 
-## Public Endpoints
+# AWS Services Summary
 
-### CloudFront Website (Production)
-
-`https://d343tuwzqee0su.cloudfront.net`
-
-### CloudFront Contact API (Used by Frontend)
-
-`https://d343tuwzqee0su.cloudfront.net/api/contact`
-
-### API Gateway Contact API (Testing Only)
-
-`https://xkjh30d0ha.execute-api.ap-south-1.amazonaws.com/prod/contact`
+| Service            | Role                          |
+| ------------------ | ----------------------------- |
+| Amazon S3          | Static website hosting        |
+| Amazon CloudFront  | HTTPS CDN and request routing |
+| Amazon API Gateway | REST API endpoint             |
+| AWS Lambda         | Serverless backend            |
+| Amazon DynamoDB    | Contact message storage       |
+| Amazon SES         | Email notifications           |
+| AWS IAM            | Secure service permissions    |
+| Amazon CloudWatch  | Monitoring and logging        |
