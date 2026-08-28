@@ -1,0 +1,683 @@
+/* ==========================================
+   Alan K Portfolio — architecture.css
+   AWS Architecture Page
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ---------- Variables ---------- */
+
+:root{
+    --bg:#030712;
+    --surface:#111827;
+    --surface-2:#1F2937;
+    --primary:#38BDF8;
+    --primary-dark:#2563EB;
+    --text:#F8FAFC;
+    --text-secondary:#CBD5E1;
+    --text-muted:#94A3B8;
+    --border:#334155;
+    --success:#22C55E;
+
+    --radius:18px;
+    --transition:.3s ease;
+    --shadow:0 20px 45px rgba(0,0,0,.35);
+}
+
+/* ---------- Reset ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    color:var(--text);
+    line-height:1.7;
+    background:
+        radial-gradient(circle at top right,#10366b 0%,transparent 35%),
+        radial-gradient(circle at bottom left,#07172f 0%,transparent 30%),
+        var(--bg);
+}
+
+.container{
+    width:min(1180px,90%);
+    margin:auto;
+}
+
+.section{
+    padding:90px 0;
+}
+
+/* ---------- Header ---------- */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    backdrop-filter:blur(14px);
+    background:rgba(3,7,18,.75);
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:rgba(2,6,23,.85);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    z-index:1000;
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:var(--primary);
+    font-size:1.3rem;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:32px;
+}
+
+.nav-links a{
+    color:var(--text-secondary);
+    text-decoration:none;
+    font-weight:500;
+    transition:0.3s ease;
+}
+
+.nav-links a:hover{
+    color:var(--primary);
+}
+
+/* Mobile */
+
+@media (max-width:768px){
+
+    .nav-container{
+        flex-direction:column;
+        gap:14px;
+        padding:16px 20px;
+    }
+
+    .nav-links{
+        gap:20px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+}
+.logo{
+    color:var(--primary);
+    font-size:1.4rem;
+    font-weight:800;
+    text-decoration:none;
+}
+
+.back-btn{
+    color:var(--text-secondary);
+    text-decoration:none;
+    transition:var(--transition);
+}
+
+.back-btn:hover{
+    color:var(--primary);
+}
+
+/* ---------- Hero ---------- */
+
+.hero{
+    padding:120px 0 80px;
+    text-align:center;
+}
+
+.hero-tag{
+    color:var(--primary);
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:3.5rem;
+    margin-bottom:20px;
+}
+
+.hero-description{
+    max-width:720px;
+    margin:auto;
+    color:var(--text-secondary);
+    font-size:1.1rem;
+}
+
+/* ---------- Section Titles ---------- */
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title h2{
+    color:var(--primary);
+    font-size:2.3rem;
+    margin-bottom:12px;
+}
+
+.section-title p{
+    color:var(--text-muted);
+}
+
+/* ===================================
+   ARCHITECTURE FLOW
+=================================== */
+
+.architecture-flow{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:22px;
+}
+
+.service-card{
+    width:min(600px,100%);
+    padding:24px;
+    background:rgba(17,24,39,.8);
+    border:1px solid rgba(56,189,248,.18);
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    box-shadow:var(--shadow);
+    text-align:center;
+    transition:var(--transition);
+}
+
+.service-card:hover{
+    transform:translateY(-5px);
+    border-color:var(--primary);
+}
+
+.service-card .icon{
+    font-size:2.5rem;
+    margin-bottom:12px;
+}
+
+.service-card h3{
+    color:var(--primary);
+    margin-bottom:10px;
+}
+
+.service-card p{
+    color:var(--text-secondary);
+}
+
+.service-card code{
+    color:#7dd3fc;
+    background:#0F172A;
+    padding:2px 6px;
+    border-radius:6px;
+}
+
+.arrow{
+    color:var(--primary);
+    font-size:2rem;
+    font-weight:bold;
+}
+
+/* ===================================
+   SERVICES GRID
+=================================== */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:24px;
+}
+
+/* ================= AWS SERVICE CARDS ================= */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px;
+    margin-top:40px;
+}
+
+.service-info{
+    background:linear-gradient(180deg,#101827,#0B1220);
+    border:1px solid rgba(56,189,248,.15);
+    border-radius:20px;
+    padding:24px;
+    transition:.3s ease;
+}
+
+.service-info:hover{
+    transform:translateY(-8px);
+    border-color:#38BDF8;
+    box-shadow:0 18px 40px rgba(56,189,248,.12);
+}
+
+.service-icon{
+    font-size:2rem;
+    margin-bottom:14px;
+}
+
+.service-info h3{
+    color:#38BDF8;
+    margin-bottom:6px;
+    font-size:1.15rem;
+}
+
+.service-role{
+    color:#94A3B8;
+    font-size:.9rem;
+    margin-bottom:18px;
+    font-weight:600;
+}
+
+.service-info ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.service-info li{
+    color:#CBD5E1;
+    font-size:.92rem;
+    line-height:1.7;
+    margin-bottom:10px;
+    padding-left:18px;
+    position:relative;
+}
+
+.service-info li::before{
+    content:"✓";
+    color:#22C55E;
+    position:absolute;
+    left:0;
+}
+
+/* ===================================
+   SECURITY GRID
+=================================== */
+
+.security-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px;
+}
+
+.security-card{
+    background:linear-gradient(180deg,#111827,#0B1220);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+    transition:var(--transition);
+}
+
+.security-card:hover{
+    transform:translateY(-5px);
+    border-color:var(--success);
+}
+
+.security-card h3{
+    color:#86EFAC;
+    margin-bottom:12px;
+}
+
+.security-card p{
+    color:var(--text-secondary);
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+
+.footer{
+    padding:60px 0;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.05);
+    background:#020617;
+}
+
+.footer h3{
+    color:var(--primary);
+    margin-bottom:10px;
+}
+
+.footer p{
+    color:var(--text-muted);
+    margin-bottom:20px;
+}
+
+.back-home{
+    display:inline-block;
+    padding:12px 22px;
+    border:2px solid var(--primary);
+    border-radius:10px;
+    color:var(--primary);
+    text-decoration:none;
+    transition:var(--transition);
+}
+
+.back-home:hover{
+    background:var(--primary);
+    color:#02111d;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+=================================== */
+
+@media (max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        justify-content:center;
+        height:auto;
+        padding:20px 0;
+        gap:15px;
+    }
+
+    .hero{
+        padding:90px 0 70px;
+    }
+
+    .hero h1{
+        font-size:2.4rem;
+    }
+
+    .hero-description{
+        font-size:1rem;
+    }
+
+    .section{
+        padding:70px 0;
+    }
+
+    .section-title h2{
+        font-size:2rem;
+    }
+}
+/* ===================================
+   Fade-In Animation
+=================================== */
+
+.hidden{
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .8s ease, transform .8s ease;
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
+/* ================= HERO ================= */
+
+.architecture-hero{
+    padding:140px 0 90px;
+    text-align:center;
+    background:
+        radial-gradient(circle at top,#123B8D22,transparent 60%);
+}
+
+.architecture-badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:999px;
+    background:rgba(56,189,248,.12);
+    border:1px solid rgba(56,189,248,.3);
+    color:#38BDF8;
+    font-size:.85rem;
+    font-weight:700;
+    margin-bottom:22px;
+}
+
+.architecture-hero h1{
+    font-size:3rem;
+    color:#F8FAFC;
+    margin-bottom:22px;
+}
+
+.architecture-hero p{
+    max-width:850px;
+    margin:auto;
+    color:#CBD5E1;
+    line-height:1.8;
+    font-size:1.1rem;
+}
+
+.architecture-tags{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:36px;
+}
+
+.architecture-tags span{
+    padding:10px 16px;
+    border-radius:999px;
+    background:#111827;
+    border:1px solid rgba(56,189,248,.2);
+    color:#94A3B8;
+    font-size:.85rem;
+}
+/* ================= AWS DIAGRAM ================= */
+
+.diagram-container{
+    margin-top:50px;
+    background:linear-gradient(180deg,#0B1220,#111827);
+    border:1px solid rgba(56,189,248,.15);
+    border-radius:24px;
+    padding:30px;
+    overflow-x:auto;
+}
+
+.architecture-diagram{
+    width:100%;
+    min-width:780px;
+}
+
+.box{
+    fill:#0F172A;
+    stroke:#38BDF8;
+    stroke-width:1.5;
+}
+
+.user{
+    stroke:#22C55E;
+}
+
+.cloudfront{
+    stroke:#60A5FA;
+}
+
+.s3{
+    stroke:#F59E0B;
+}
+
+.api{
+    stroke:#A855F7;
+}
+
+.lambda{
+    stroke:#38BDF8;
+}
+
+.dynamo{
+    stroke:#10B981;
+}
+
+.ses{
+    stroke:#F97316;
+}
+
+.label{
+    fill:#F8FAFC;
+    font-size:17px;
+    font-weight:700;
+    font-family:'Inter',sans-serif;
+}
+
+.small{
+    fill:#94A3B8;
+    font-size:13px;
+    font-family:'Inter',sans-serif;
+}
+
+.emoji{
+    font-size:24px;
+}
+
+.arrow-line{
+    stroke:#38BDF8;
+    stroke-width:2.5;
+    marker-end:url(#arrowhead);
+}
+/* ================= ARCHITECTURE DECISIONS ================= */
+
+.decision-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:24px;
+    margin-top:40px;
+}
+
+.decision-card{
+    background:linear-gradient(180deg,#101827,#0B1220);
+    border:1px solid rgba(56,189,248,.15);
+    border-radius:20px;
+    padding:28px;
+    transition:0.3s ease;
+}
+
+.decision-card:hover{
+    transform:translateY(-8px);
+    border-color:#38BDF8;
+    box-shadow:0 18px 40px rgba(56,189,248,.12);
+}
+
+.decision-icon{
+    font-size:2rem;
+    margin-bottom:18px;
+}
+
+.decision-card h3{
+    color:#38BDF8;
+    margin-bottom:14px;
+    font-size:1.15rem;
+}
+
+.decision-card p{
+    color:#CBD5E1;
+    line-height:1.7;
+    font-size:0.95rem;
+}
+/* ================= SECURITY ================= */
+
+.security-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:24px;
+    margin-top:40px;
+}
+
+.security-card{
+    background:linear-gradient(180deg,#101827,#0B1220);
+    border:1px solid rgba(34,197,94,.15);
+    border-radius:20px;
+    padding:24px;
+    transition:.3s ease;
+}
+
+.security-card:hover{
+    transform:translateY(-8px);
+    border-color:#22C55E;
+    box-shadow:0 18px 40px rgba(34,197,94,.12);
+}
+
+.security-icon{
+    font-size:2rem;
+    margin-bottom:14px;
+}
+
+.security-card h3{
+    color:#22C55E;
+    margin-bottom:16px;
+}
+
+.security-card ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.security-card li{
+    color:#CBD5E1;
+    margin-bottom:10px;
+    padding-left:18px;
+    position:relative;
+    line-height:1.6;
+}
+
+.security-card li::before{
+    content:"✓";
+    position:absolute;
+    left:0;
+    color:#22C55E;
+    font-weight:700;
+}
+
+/* Bottom Summary Box */
+
+.best-practices-box{
+    margin-top:60px;
+    background:linear-gradient(90deg,#052814,#0B1220);
+    border:1px solid rgba(34,197,94,.2);
+    border-radius:22px;
+    padding:30px;
+    text-align:center;
+}
+
+.best-practices-box h3{
+    color:#22C55E;
+    margin-bottom:28px;
+}
+
+.practice-list{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+}
+
+.practice-list span{
+    padding:10px 16px;
+    border-radius:999px;
+    background:rgba(34,197,94,.1);
+    border:1px solid rgba(34,197,94,.25);
+    color:#D1FAE5;
+    font-size:.9rem;
+    font-weight:600;
+}
