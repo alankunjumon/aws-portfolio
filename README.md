@@ -54,11 +54,7 @@ Amazon CloudFront (HTTPS + CDN)
               Store Messages  Email Notification
 ```
 
-### Architecture Preview
 
-![AWS Architecture](assets/screenshots/architecture.jpeg)
-
----
 
 ## ☁️ AWS Services Used
 
@@ -101,11 +97,11 @@ Amazon CloudFront (HTTPS + CDN)
 
 ### Homepage
 
-![Portfolio Homepage](assets/screenshots/homepage.jpeg)
+![Portfolio Homepage](aws-portfolio/assets/screenshots/homepage.jpeg)
 
 ### AWS Architecture Page
 
-![AWS Architecture Page](assets/screenshots/architecture.jpeg)
+![AWS Architecture Page](aws-portfolio/assets/screenshots/architecture.jpeg)
 
 ---
 
