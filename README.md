@@ -14,7 +14,7 @@
 
 ## 🌐 Live Portfolio
 
-**Portfolio Website:** *Paste your CloudFront URL here.*
+**Portfolio Website:** *d343tuwzqee0su.cloudfront.net*
 
 **GitHub Repository:** `https://github.com/alankunjumon/aws-portfolio`
 
